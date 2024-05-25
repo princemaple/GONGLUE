@@ -25,19 +25,9 @@ jobs:
     - name: Run script
       working-directory: script
       run: |
-        python make_chm.py
         python make_epub.py
+        python make_chm.py
         ls ../build
-
-    - name: Upload chm
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./build/GONGLUE.chm
-        asset_name: GONGLUE.chm
-        asset_content_type: application/octet-stream
 
     - name: Upload epub
       uses: actions/upload-release-asset@v1
@@ -48,3 +38,13 @@ jobs:
         asset_path: ./build/GONGLUE.epub
         asset_name: GONGLUE.epub
         asset_content_type: application/octet-stream
+
+    # - name: Upload chm
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ github.event.release.upload_url }}
+    #     asset_path: ./build/GONGLUE.chm
+    #     asset_name: GONGLUE.chm
+    #     asset_content_type: application/octet-stream
